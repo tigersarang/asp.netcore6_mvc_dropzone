@@ -29,5 +29,17 @@ namespace WebApplication6.Controllers
                 return BadRequest(new { code = -2, message = ex.Message });
             }
         }
+
+        [HttpDelete("{fileName}")]
+        public async Task<IActionResult> DeleteFile(string fileName)
+        {
+            if (System.IO.File.Exists(fileName))
+            {
+                System.IO.File.Delete(fileName);
+                return Ok();
+            }
+
+            return NotFound();
+        }
     }
 }

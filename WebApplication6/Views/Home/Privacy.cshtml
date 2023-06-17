@@ -1,6 +1,19 @@
-﻿@{
+﻿@model List<WebApplication6.Models.Board>
+
+@{
     ViewData["Title"] = "Privacy Policy";
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+@foreach (var board in Model)
+{
+    <hr />
+    <h1>Title : @board.Title</h1>
+    
+    @foreach (var file in board.BoardFiles)
+    {
+        <a href="/Home/DownloadFile/@Html.Raw(System.Net.WebUtility.UrlEncode(file.LinkFileName))">@file.FileName</a>
+        <br />
+    }
+
+}

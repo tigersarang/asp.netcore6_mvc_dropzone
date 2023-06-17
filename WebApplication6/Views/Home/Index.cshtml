@@ -54,6 +54,24 @@
             });
         });
 
+        window.addEventListener("beforeunload", function (e) {
+            for (var i=0; i < myDropzone.files.length; i++) {
+                var file = myDropzone.files[i];
+
+                $.ajax({
+                    url: "/Upload/DeleteFile/" + encodeURIComponent(file.upload.newName),
+                    type: "DELETE",
+                    data: { fileName: file.upload.newName },
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    }
+                });
+            }
+        });
+
         //Dropzone.options.myDropzone = {
         //    url: "/Home/Upload",
         //    autoProcessQueue: false,
