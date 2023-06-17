@@ -1,0 +1,67 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<link href="~/dropzone/dist/dropzone.css" rel="stylesheet" />
+
+<form >
+    <div class="text-center">
+        <h1 class="display-4">Board</h1>
+        <input type="text" name="title" />
+        <div id="myDropzone" class="dropzone"></div>
+        <button type="submit">Save</button>
+    </div>
+</form>
+
+@section Scripts {
+    <script src="~/dropzone/dist/dropzone-min.js"></script>
+    <script>
+        var myDropzone = new Dropzone("#myDropzone", {
+            url: "/Upload/UploadFile",
+            paramName: "file", // The name that will be used to transfer the file
+            maxFiles: 10,
+            maxFilesize: 200,       // 200mb
+            addRemoveLinks: true,
+            success: function (file, response) {
+                console.log(response);
+            },
+            error: function (file, response) {
+                return false;
+            }
+        });
+
+        //Dropzone.options.myDropzone = {
+        //    url: "/Home/Upload",
+        //    autoProcessQueue: false,
+        //    uploadMultiple: true,
+        //    parallelUploads: 100,
+        //    maxFiles: 100,
+        //    maxFilesize: 2,
+        //    acceptedFiles: "image/*",
+        //    addRemoveLinks: true,
+        //    init: function () {
+        //        var submitButton = document.querySelector("#submit-all");
+        //        myDropzone = this;
+        //        submitButton.addEventListener("click", function () {
+        //            myDropzone.processQueue();
+        //        });
+        //        this.on("complete", function () {
+        //            if (this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0) {
+        //                var _this = this;
+        //                _this.removeAllFiles();
+        //            }
+        //            list_image();
+        //        });
+        //    },
+        //};
+        //function list_image() {
+        //    $.ajax({
+        //        type: "POST",
+        //        url: "/Home/ListImage",
+        //        success: function (data) {
+        //            $("#list_image").html(data);
+        //        },
+        //    });
+        //}
+        //list_image();
+    </script>
+}
