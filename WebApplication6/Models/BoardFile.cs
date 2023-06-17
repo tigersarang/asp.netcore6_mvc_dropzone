@@ -6,6 +6,7 @@ namespace WebApplication6.Models
     {
         public int Id { get; set; }
         public string FileName { get; set; }
+        public string LinkFileName { get; set; }
 
         public int BoardId { get; set; }
         [JsonIgnore]

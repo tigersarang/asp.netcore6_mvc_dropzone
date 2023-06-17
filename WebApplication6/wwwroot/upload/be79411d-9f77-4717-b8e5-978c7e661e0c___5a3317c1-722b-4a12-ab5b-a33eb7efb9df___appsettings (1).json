@@ -1,0 +1,12 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "ConnectionStrings": {
+    "DefaultConnection": "Data Source=WIN-강좌\\KGCHOI;Initial Catalog=dropzoneDb;Integrated Security=True;Trust Server Certificate=True"
+  },
+  "AllowedHosts": "*"
+}

@@ -4,6 +4,6 @@
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public List<BoardFile> BaordFiles { get; set; }
+        public List<BoardFile> BoardFiles { get; set; }
     }
 }

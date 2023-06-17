@@ -3,11 +3,12 @@
 }
 <link href="~/dropzone/dist/dropzone.css" rel="stylesheet" />
 
-<form >
+<form id="myForm" action="/Home/SaveForm" method="post" >
     <div class="text-center">
         <h1 class="display-4">Board</h1>
         <input type="text" name="title" />
         <div id="myDropzone" class="dropzone"></div>
+        <div id="divFiles"></div>
         <button type="submit">Save</button>
     </div>
 </form>
@@ -22,11 +23,35 @@
             maxFilesize: 200,       // 200mb
             addRemoveLinks: true,
             success: function (file, response) {
+                file.upload.newName = response.newName;
                 console.log(response);
             },
             error: function (file, response) {
                 return false;
             }
+        });
+
+        $("#myForm").submit(function (e) {
+            e.preventDefault();
+
+            for (var i=0; i < myDropzone.files.length; i++)
+            {
+                $("#divFiles").append("<input type='hidde' name='files' value ='" + myDropzone.files[i].upload.newName + "' />");
+            }
+            
+            $.ajax({
+                url: "/Home/SaveForm",
+                type: "POST",
+                data: $("#myForm").serialize(),
+                success: function (data) {
+                    myDropzone.removeAllFiles();
+                    console.log(data);
+                    location.href = "/Home/Privacy";
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
         });
 
         //Dropzone.options.myDropzone = {
